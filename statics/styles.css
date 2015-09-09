@@ -3,6 +3,10 @@ html {
     min-height: 100%;
 }
 
+canvas {
+    width: 100%;
+}
+
 .main-container {
     margin-top: 20px;
 }

@@ -15,12 +15,12 @@ function render_graph(used_percent, element) {
 function get_memory_data() {
     $.ajax({url: '/memory/'})
         .done(function(data) {
-            $("#used_memory_percent").html(data.used_memory_percent);
-            $("#used_memory").html(data.used_memory);
-            $("#total_memory").html(data.total_memory);
-            $("#tasks_num").html(data.tasks_num);
+            $("#used-memory-percent").html(data.used_memory_percent);
+            $("#used-memory").html(data.used_memory);
+            $("#total-memory").html(data.total_memory);
+            $("#tasks-num").html(data.tasks_num);
             $("#uptime").html(data.uptime);
-            render_graph(data.used_memory_percent, "used_memory_graph");
+            render_graph(data.used_memory_percent, "used-memory-graph");
             console.log("Call for new memory data.");
         })
 }
@@ -28,10 +28,10 @@ function get_memory_data() {
 function get_swap_data() {
     $.ajax({url: '/swap/'})
         .done(function(data) {
-            $("#used_swap_percent").html(data.used_swap_percent);
-            $("#used_swap").html(data.used_swap);
-            $("#total_swap").html(data.total_swap);
-            render_graph(data.used_swap_percent, "used_swap_graph");
+            $("#used-swap-percent").html(data.used_swap_percent);
+            $("#used-swap").html(data.used_swap);
+            $("#total-swap").html(data.total_swap);
+            render_graph(data.used_swap_percent, "used-swap-graph");
             console.log("Call for new swap data.");
         })
 }
@@ -39,14 +39,14 @@ function get_swap_data() {
 function get_cpu_data() {
     $.ajax({url: '/cpu/'})
         .done(function(data) {
-            $("#cpu_percent").html("");
+            $("#cpu-percent").html("");
             for (var i = 0; i < data.cpu_percent.length; i++) {
                 var cpu_num = i + 1;
-                $("#cpu_" + cpu_num).parent().parent().remove();
-                $("#info_table").append(
-                    "<tr><td>CPU " + cpu_num + "</td><td colspan=\"2\"><canvas id=\"cpu_" + cpu_num + "\" width=\"400\" height=\"18\"></canvas></td></tr>"
+                $("#cpu-" + cpu_num).parent().parent().remove();
+                $("#info-table").append(
+                    "<tr><td>CPU " + cpu_num + "</td><td colspan=\"2\"><canvas id=\"cpu-" + cpu_num + "\" width=\"400\" height=\"18\"></canvas></td></tr>"
                 );
-                render_graph(data.cpu_percent[i], "cpu_" + cpu_num);
+                render_graph(data.cpu_percent[i], "cpu-" + cpu_num);
             }
             console.log("Call for new cpu data.");
         })
