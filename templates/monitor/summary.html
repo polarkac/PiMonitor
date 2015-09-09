@@ -1,54 +1,38 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<script type="text/javascript">
-function get_memory_data() {
-    $.ajax({url: {% url 'monitor-memory_data' %}})
-        .done(function(data) {
-            $("#used_memory_percent").html(data.used_memory_percent);
-            $("#used_memory").html(data.used_memory);
-            $("#total_memory").html(data.total_memory);
-            console.log("Call for new memory data.");
-        })
-}
-function get_swap_data() {
-    $.ajax({url: {% url 'monitor-swap_data' %}})
-        .done(function(data) {
-            $("#used_swap_percent").html(data.used_swap_percent);
-            $("#used_swap").html(data.used_swap);
-            $("#total_swap").html(data.total_swap);
-            console.log("Call for new swap data.");
-        })
-}
-function get_cpu_data() {
-    $.ajax({url: {% url 'monitor-cpu_data' %}})
-        .done(function(data) {
-            $("#cpu_percent").html("");
-            for (var i = 0; i < data.cpu_percent.length; i++) {
-                var cpu_num = i + 1
-                $("#cpu_percent").append(
-                    "<p>CPU " + cpu_num + ": " + data.cpu_percent[i] + "%</p>"
-                );
-            }
-            console.log("Call for new cpu data.");
-        })
-}
-get_all_data = function() {
-    get_memory_data();
-    get_swap_data();
-    get_cpu_data();
-}
-get_all_data();
-setInterval(get_all_data, 5000);
-</script>
-<p>
-    Current memory used: <span id="used_memory_percent">0</span>%
-    (<span id="used_memory">0</span>/<span id="total_memory">0</span>MB)
-</p>
-<p>
-    Current swap used: <span id="used_swap_percent">0</span>%
-    (<span id="used_swap">0</span>/<span id="total_swap">0</span>MB)
-</p>
-<p id="cpu_percent">
-</p>
+<div id="memory_load_info">
+    <table id="summary_table">
+        <tr>
+            <td class="first_column">
+                Memory
+            </td>
+            <td>
+                <canvas id="used_memory_graph" width="200" height="18"></canvas>
+            </td>
+            <td>
+                <span id="used_memory">0</span>/<span id="total_memory">0</span>MB
+            </td>
+        </tr>
+        <tr>
+            <td class="first_column">
+                Swap
+            </td>
+            <td>
+                <canvas id="used_swap_graph" width="200" height="18"></canvas>
+            </td>
+            <td>
+                <span id="used_swap">0</span>/<span id="total_swap">0</span>MB
+            </td>
+        </tr>
+    </table>
+    <table id="cpu_percent">
+    </table>
+</div>
+<div id="additional_info">
+    <table>
+        <tr><td>Tasks</td><td><span id="tasks_num">0</span></td></tr>
+        <tr><td>Uptime</td><td><span id="uptime">0</span></td></tr>
+    </table>
+</div>
 {% endblock %}

@@ -22,6 +22,8 @@ def memory_data(request):
                 current_memory_log.total - current_memory_log.available
             ),
             'total_memory': convert_to_mb(current_memory_log.total),
+            'tasks_num': current_memory_log.tasks_num,
+            'uptime': str(current_memory_log.uptime),
         })
 
         return HttpResponse(json.dumps(memory_data), content_type='application/json')

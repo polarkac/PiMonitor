@@ -1,0 +1,13 @@
+.first_column {
+    width: 100px;
+    text-align: right;
+}
+
+#memory_load_info {
+    float: left;
+}
+
+#additional_info {
+    float: left;
+    margin-left: 50px;
+}

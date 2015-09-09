@@ -8,6 +8,8 @@ class MemoryLog(models.Model):
     total = models.BigIntegerField()
     available = models.BigIntegerField()
     percent = models.PositiveSmallIntegerField()
+    tasks_num = models.IntegerField()
+    uptime = models.DurationField()
     datetime = models.DateTimeField(default=timezone.now)
 
     class Meta:
