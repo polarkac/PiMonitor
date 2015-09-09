@@ -4,11 +4,22 @@
     <head>
         <meta charset="utf-8">
         <title>PiMonitor</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://cdn.rawgit.com/twbs/bootstrap/v4-dev/dist/css/bootstrap.css">
         <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
         <link rel="stylesheet" href="{% static 'styles.css' %}">
     </head>
     <body>
-        {% block content %}{% endblock %}
+        <div class="container main-container">
+            {% block content %}{% endblock %}
+        </div>
+        <footer class="footer">
+            <div class="container">
+                <p class="text-muted">Monitoring tool primary for RPi. Source code hosted on <a href="https://github.com/polarkac/PiMonitor/">GitHub</a></p>
+            </div>
+        </footer>
         <script type="text/javascript" src="{% static 'scripts.js' %}"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+        <script src="https://cdn.rawgit.com/twbs/bootstrap/v4-dev/dist/js/bootstrap.js"></script>
     </body>
 </html>

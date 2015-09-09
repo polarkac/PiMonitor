@@ -41,9 +41,10 @@ function get_cpu_data() {
         .done(function(data) {
             $("#cpu_percent").html("");
             for (var i = 0; i < data.cpu_percent.length; i++) {
-                var cpu_num = i + 1
-                $("#cpu_percent").append(
-                        "<tr><td class=\"first_column\">CPU " + cpu_num + "</td><td><canvas id=\"cpu_" + cpu_num + "\" width=\"200\" height=\"18\"></canvas></td><td>" + data.cpu_percent[i] + "%</td></tr>"
+                var cpu_num = i + 1;
+                $("#cpu_" + cpu_num).parent().parent().remove();
+                $("#info_table").append(
+                        "<tr><td>CPU " + cpu_num + "</td><td><canvas id=\"cpu_" + cpu_num + "\" width=\"200\" height=\"18\"></canvas></td><td>" + data.cpu_percent[i] + "%</td></tr>"
                 );
                 render_graph(data.cpu_percent[i], "cpu_" + cpu_num);
             }

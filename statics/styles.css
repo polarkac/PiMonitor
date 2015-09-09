@@ -1,13 +1,16 @@
-.first_column {
-    width: 100px;
-    text-align: right;
+html {
+    position: relative;
+    min-height: 100%;
 }
 
-#memory_load_info {
-    float: left;
+.main-container {
+    margin-top: 20px;
 }
 
-#additional_info {
-    float: left;
-    margin-left: 50px;
+.footer {
+    position: absolute;
+    bottom: 0px;
+    width: 100%;
+    height: 60px;
+    background-color: #f5f5f5;
 }
