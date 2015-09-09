@@ -3,6 +3,10 @@ html {
     min-height: 100%;
 }
 
+body {
+    margin-bottom: 60px;
+}
+
 canvas {
     width: 100%;
 }
@@ -22,4 +26,8 @@ canvas {
 
 .footer .text-muted {
     margin-top: 18px;
+}
+
+.bold {
+    font-weight: bold;
 }

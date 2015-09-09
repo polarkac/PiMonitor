@@ -44,7 +44,7 @@ function get_cpu_data() {
                 var cpu_num = i + 1;
                 $("#cpu-" + cpu_num).parent().parent().remove();
                 $("#info-table").append(
-                    "<tr><td>CPU " + cpu_num + "</td><td colspan=\"2\"><canvas id=\"cpu-" + cpu_num + "\" width=\"400\" height=\"18\"></canvas></td></tr>"
+                    "<tr><td class=\"bold\">CPU " + cpu_num + "</td><td colspan=\"2\"><canvas id=\"cpu-" + cpu_num + "\" width=\"400\" height=\"18\"></canvas></td></tr>"
                 );
                 render_graph(data.cpu_percent[i], "cpu-" + cpu_num);
             }
