@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<script type="text/javascript">
+function get_memory_data() {
+    $.ajax({url: {% url 'monitor-memory_data' %}})
+        .done(function(data) {
+            $("#used_memory").html(data.used_memory);
+            console.log("Call for new memory data.");
+        })
+}
+function get_swap_data() {
+    $.ajax({url: {% url 'monitor-swap_data' %}})
+        .done(function(data) {
+            $("#used_swap").html(data.used_swap);
+            console.log("Call for new swap data.");
+        })
+}
+setInterval(get_memory_data, 5000);
+setInterval(get_swap_data, 5000);
+</script>
+<p>Current memory used: <span id="used_memory">0</span>%</p>
+<p>Current swap used: <span id="used_swap">0</span>%</p>
+{% endblock %}
