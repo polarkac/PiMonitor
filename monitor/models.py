@@ -1,3 +1,5 @@
+import json
+
 from django.db import models
 from django.utils import timezone
 
@@ -31,3 +33,19 @@ class SwapLog(models.Model):
 
     def __str__(self):
         return 'Swap used: {}%'.format(self.percent)
+
+class CpuLog(models.Model):
+
+    percents = models.CharField(max_length=50)
+    datetime = models.DateTimeField(default=timezone.now)
+
+    class Meta:
+        verbose_name = 'CPU log'
+        verbose_name_plural = 'CPU logs'
+        ordering = ['-datetime']
+
+    def get_percents(self):
+        return json.loads(self.percents)
+
+    def __str__(self):
+        return 'CPU used: {}'.format(self.percents)
