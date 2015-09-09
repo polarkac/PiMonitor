@@ -7,9 +7,9 @@ function render_graph(used_percent, element) {
     context.fillStyle = "#60d4ff";
     context.fillRect(used_size, 0, canvas.width - used_size, canvas.height);
     context.fillStyle = "black";
-    context.font = "15px serif";
+    context.font = "15px monospace";
     context.textAlign = "center";
-    context.fillText(used_percent + "%", 100, 15);
+    context.fillText(used_percent + "%", canvas.width / 2, 15);
 }
 
 function get_memory_data() {
@@ -44,7 +44,7 @@ function get_cpu_data() {
                 var cpu_num = i + 1;
                 $("#cpu_" + cpu_num).parent().parent().remove();
                 $("#info_table").append(
-                        "<tr><td>CPU " + cpu_num + "</td><td><canvas id=\"cpu_" + cpu_num + "\" width=\"200\" height=\"18\"></canvas></td><td>" + data.cpu_percent[i] + "%</td></tr>"
+                    "<tr><td>CPU " + cpu_num + "</td><td colspan=\"2\"><canvas id=\"cpu_" + cpu_num + "\" width=\"400\" height=\"18\"></canvas></td></tr>"
                 );
                 render_graph(data.cpu_percent[i], "cpu_" + cpu_num);
             }
