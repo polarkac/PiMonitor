@@ -1,4 +1,4 @@
-import json
+﻿import json
 
 from django.db import models
 from django.utils import timezone
@@ -51,3 +51,16 @@ class CpuLog(models.Model):
 
     def __str__(self):
         return 'CPU used: {}'.format(self.percents)
+
+class NetLog(models.Model):
+
+    bytes_sent = models.BigIntegerField()
+    bytes_recv = models.BigIntegerField()
+    kbps_sent = models.IntegerField()
+    kbps_recv = models.IntegerField()
+    datetime = models.DateTimeField(default=timezone.now) 
+
+    class Meta:
+        verbose_name = 'Network Log'
+        verbose_name_plural = 'Network Logs'
+        ordering = ['-datetime']

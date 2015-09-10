@@ -25,6 +25,18 @@ function get_memory_data() {
         })
 }
 
+function get_network_data() {
+    $.ajax({ url: '/net/' })
+        .done(function (data) {
+            $("#mb-sent").html(data.bytes_sent);
+            $("#mb-recv").html(data.bytes_recv);
+            $("#kb-sending").html(data.kbps_sent);
+            $("#kb-receiving").html(data.kbps_recv);
+            
+            console.log("Call for new network data.");
+        })
+}
+
 function get_swap_data() {
     $.ajax({url: '/swap/'})
         .done(function(data) {
@@ -56,6 +68,7 @@ function get_all_data() {
     get_memory_data();
     get_swap_data();
     get_cpu_data();
+    get_network_data();
 }
 
 $("body").load(get_all_data());

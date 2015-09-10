@@ -1,9 +1,9 @@
-import json
+﻿import json
 
 from django.views.generic import TemplateView
 from django.http import HttpResponse
 
-from monitor.models import MemoryLog, SwapLog, CpuLog
+from monitor.models import MemoryLog, SwapLog, CpuLog, NetLog
 
 def convert_to_mb(byte_size):
     return round(byte_size / 1024 / 1024, 1)
@@ -49,3 +49,16 @@ def cpu_data(request):
         })
 
         return HttpResponse(json.dumps(cpu_data), content_type='application/json')
+
+def net_data(request):
+    if request.is_ajax():
+        net_data = {}
+        current_net_log = NetLog.objects.all()[0]
+        net_data.update({
+            'bytes_recv': convert_to_mb(current_net_log.bytes_recv),
+            'bytes_sent': convert_to_mb(current_net_log.bytes_sent),
+            'kbps_recv': current_net_log.kbps_recv,
+            'kbps_sent': current_net_log.kbps_sent
+        })
+
+        return HttpResponse(json.dumps(net_data), content_type='application/json')

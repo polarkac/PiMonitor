@@ -1,3 +1,7 @@
-from django.contrib import admin
+﻿from django.contrib import admin
+from .models import *
 
-# Register your models here.
+admin.site.register(CpuLog)
+admin.site.register(MemoryLog)
+admin.site.register(SwapLog)
+admin.site.register(NetLog)
