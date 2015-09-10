@@ -28,7 +28,7 @@ def update_logs():
     uptime = datetime.now() - datetime.fromtimestamp(boot_time)
     tasks_num = len(psutil.pids())
     net = psutil.net_io_counters()
-    
+
     MemoryLog.objects.create(
         total=memory.total, available=memory.available,
         percent=memory.percent, uptime=uptime, tasks_num=tasks_num
@@ -52,4 +52,4 @@ def update_logs():
 if __name__ == '__main__':
     while(True):
         update_logs()
-        time.sleep(5)
+        time.sleep(time_sleep)
