@@ -1,4 +1,4 @@
-import json
+﻿import json
 import psutil
 import math
 
@@ -53,5 +53,11 @@ def cpu_data(request):
 
 def net_data(request):
     net_data = {}
+    net = psutil.net_io_counters()
+
+    net_data.update({
+        'bytes_recv': net.bytes_recv,
+        'bytes_sent': net.bytes_sent,
+    })
 
     return HttpResponse(json.dumps(net_data), content_type='application/json')

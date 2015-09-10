@@ -1,3 +1,15 @@
+var timeout = 5;
+var last_bytes_sent = 0;
+var last_bytes_recv = 0;
+
+function toKB(bytes) {
+    return Math.round(bytes / 1024);
+}
+
+function toMB(bytes) {
+    return Math.round(bytes / 1024 / 1024);
+}
+
 function render_graph(used_percent, element) {
     var canvas = document.getElementById(element);
     var context = canvas.getContext("2d");
@@ -28,10 +40,13 @@ function get_memory_data() {
 function get_network_data() {
     $.ajax({ url: '/net/' })
         .done(function (data) {
-            $("#mb-sent").html(data.bytes_sent);
-            $("#mb-recv").html(data.bytes_recv);
-            $("#kb-sending").html(data.kbps_sent);
-            $("#kb-receiving").html(data.kbps_recv);
+            $("#mb-sent").html(toMB(data.bytes_sent));
+            $("#mb-recv").html(toMB(data.bytes_recv));         
+            $("#kb-sending").html(toKB((data.bytes_sent - last_bytes_sent) / timeout));
+            $("#kb-receiving").html(toKB((data.bytes_recv - last_bytes_recv) / timeout));
+
+            last_bytes_recv = data.bytes_recv;
+            last_bytes_sent = data.bytes_sent;
             
             console.log("Call for new network data.");
         })
@@ -72,4 +87,4 @@ function get_all_data() {
 }
 
 $("body").load(get_all_data());
-setInterval(get_all_data, 5000);
+setInterval(get_all_data, timeout * 1000);
