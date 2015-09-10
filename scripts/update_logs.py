@@ -5,13 +5,12 @@ import sys
 import time
 import json
 
-from datetime import datetime
-
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path = sys.path + [BASE_DIR]
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'PiMonitor.settings')
 
 import psutil
+from datetime import datetime
 
 from monitor.models import MemoryLog, SwapLog, CpuLog
 
