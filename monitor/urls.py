@@ -1,4 +1,4 @@
-﻿from django.conf.urls import url
+from django.conf.urls import url
 
 from monitor.views import SummaryView, memory_data, swap_data, cpu_data, net_data
 
