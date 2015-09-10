@@ -1,5 +1,6 @@
 import json
 import psutil
+import math
 
 from datetime import datetime
 from django.views.generic import TemplateView
@@ -16,12 +17,18 @@ def memory_data(request):
     memory = psutil.virtual_memory()
     boot_time = psutil.boot_time()
     uptime = datetime.now() - datetime.fromtimestamp(boot_time)
+    hours = uptime.seconds / 3600
+    minutes = (hours - math.floor(hours)) * 60
+    seconds = (minutes - math.floor(minutes)) * 60
     memory_data = {
         'used_memory_percent': memory.percent,
         'used_memory': convert_to_mb(memory.total - memory.available),
         'total_memory': convert_to_mb(memory.total),
         'tasks_num': len(psutil.pids()),
-        'uptime': str(uptime),
+        'uptime': '{days} days {hours:02.0f}:{minutes:02.0f}:{seconds:02.0f}'.format(
+            days=uptime.days, hours=hours,
+            minutes=minutes, seconds=seconds
+        ),
     }
 
     return HttpResponse(json.dumps(memory_data), content_type='application/json')
