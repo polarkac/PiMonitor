@@ -41,13 +41,13 @@ function get_network_data() {
     $.ajax({ url: '/net/' })
         .done(function (data) {
             $("#mb-sent").html(toMB(data.bytes_sent));
-            $("#mb-recv").html(toMB(data.bytes_recv));         
+            $("#mb-recv").html(toMB(data.bytes_recv));
             $("#kb-sending").html(toKB((data.bytes_sent - last_bytes_sent) / timeout));
             $("#kb-receiving").html(toKB((data.bytes_recv - last_bytes_recv) / timeout));
 
             last_bytes_recv = data.bytes_recv;
             last_bytes_sent = data.bytes_sent;
-            
+
             console.log("Call for new network data.");
         })
 }
