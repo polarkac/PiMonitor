@@ -1,4 +1,4 @@
-var timeout = 5;
+var timeout = 1;
 var last_bytes_sent = 0;
 var last_bytes_recv = 0;
 
