@@ -1,0 +1,4 @@
+Django==1.8.4
+Pillow==2.9.0
+peewee==2.6.3
+psutil==3.2.1
